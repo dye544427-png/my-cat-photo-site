@@ -48,35 +48,35 @@
       <div class="grid" id="gallery">
         <!-- 替换 images 文件夹里的图片，并修改对应描述文字 -->
         <figure class="grid-item" data-category="portrait">
-          < img src="images/photo1.jpg" alt="人像作品 1">
+          < img src="图片/photo1.jpg" alt="人像作品 1">
           <figcaption>人像 — 情绪写真</figcaption>
         </figure>
         <figure class="grid-item" data-category="landscape">
-          < img src="images/photo2.jpg" alt="风光作品 1">
+          < img src="图片/photo2.jpg" alt="风光作品 1">
           <figcaption>风光 — 乡村风光</figcaption>
         </figure>
         <figure class="grid-item" data-category="wedding">
-          < img src="images/photo3.jpg" alt="婚礼作品 1">
+          < img src="图片/photo3.jpg" alt="婚礼作品 1">
           <figcaption>婚礼 — 现场记录</figcaption>
         </figure>
         <figure class="grid-item" data-category="editorial">
-          < img src="images/photo4.jpg" alt="时尚大片 1">
+          < img src="图片/photo4.jpg" alt="时尚大片 1">
           <figcaption>时尚 — 杂志大片</figcaption>
         </figure>
         <figure class="grid-item" data-category="portrait">
-          < img src="images/photo5.jpg" alt="人像作品 2">
+          < img src="图片/photo5.jpg" alt="人像作品 2">
           <figcaption>人像 — 户外外景</figcaption>
         </figure>
         <figure class="grid-item" data-category="landscape">
-          < img src="images/photo6.jpg" alt="风光作品 2">
+          < img src="图片/photo6.jpg" alt="风光作品 2">
           <figcaption>风光 — 壮丽山川</figcaption>
         </figure>
         <figure class="grid-item" data-category="wedding">
-          < img src="images/photo7.jpg" alt="婚礼作品 2">
+          < img src="图片/photo7.jpg" alt="婚礼作品 2">
           <figcaption>婚礼 — 仪式瞬间</figcaption>
         </figure>
         <figure class="grid-item" data-category="editorial">
-          < img src="images/photo8.jpg" alt="时尚大片 2">
+          < img src="图片/photo8.jpg" alt="时尚大片 2">
           <figcaption>时尚 — 概念创作</figcaption>
         </figure>
       </div>
