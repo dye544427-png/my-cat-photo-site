@@ -1,0 +1,85 @@
+// Lightweight gallery filter + lightbox
+document.addEventListener('DOMContentLoaded', () => {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const items = Array.from(document.querySelectorAll('.grid-item'));
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = lightbox.querySelector('img');
+  const lbCaption = lightbox.querySelector('.lightbox-caption');
+  const lbClose = lightbox.querySelector('.lightbox-close');
+  const lbPrev = lightbox.querySelector('.lightbox-prev');
+  const lbNext = lightbox.querySelector('.lightbox-next');
+  let currentIndex = -1;
+
+  // Filter behavior
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelector('.filter-btn.active').classList.remove('active');
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      items.forEach((it) => {
+        const cat = it.dataset.category || 'all';
+        if (filter === 'all' || cat === filter) it.classList.remove('hidden');
+        else it.classList.add('hidden');
+      });
+    });
+  });
+
+  // Lightbox open
+  function openLightbox(index){
+    const el = items[index];
+    const img = el.querySelector('img');
+    lbImg.src = img.src;
+    lbImg.alt = img.alt || '';
+    lbCaption.textContent = el.querySelector('figcaption')?.textContent || '';
+    lightbox.setAttribute('aria-hidden', 'false');
+    currentIndex = index;
+  }
+  function closeLightbox(){
+    lightbox.setAttribute('aria-hidden', 'true');
+    lbImg.src = '';
+    currentIndex = -1;
+  }
+  function showNext(step=1){
+    if (currentIndex === -1) return;
+    const visible = items.filter(i => !i.classList.contains('hidden'));
+    const idxInVisible = visible.indexOf(items[currentIndex]);
+    const nextIdx = (idxInVisible + step + visible.length) % visible.length;
+    openLightbox(items.indexOf(visible[nextIdx]));
+  }
+
+  items.forEach((it, i) => {
+    it.addEventListener('click', () => openLightbox(i));
+  });
+
+  lbClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  lbPrev.addEventListener('click', () => showNext(-1));
+  lbNext.addEventListener('click', () => showNext(1));
+
+  // Keyboard support
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.getAttribute('aria-hidden') === 'false') {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') showNext(1);
+      if (e.key === 'ArrowLeft') showNext(-1);
+    }
+  });
+
+  // Contact form fallback: open mail client if no server action configured
+  const form = document.getElementById('contact-form');
+  form.addEventListener('submit', (e) => {
+    if (form.action === '#' || form.action.trim() === '') {
+      e.preventDefault();
+      const name = encodeURIComponent(form.name.value.trim());
+      const email = encodeURIComponent(form.email.value.trim());
+      const message = encodeURIComponent(form.message.value.trim());
+      const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0A${message}`;
+      window.location.href = `mailto:you@example.com?subject=Website%20Contact&body=${body}`;
+    }
+  });
+
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+});
